@@ -9,7 +9,10 @@ function GenerateForm {
     #region Generated Form Objects
         $MainForum = New-Object System.Windows.Forms.Form
         $GetServices = New-Object System.Windows.Forms.Button
+
         $ClipBoard01 = New-Object System.Windows.Forms.Button
+        $ClipBoard02 = New-Object System.Windows.Forms.Button
+
         $richTextBox1 = New-Object System.Windows.Forms.RichTextBox
         $InitialFormWindowState = New-Object System.Windows.Forms.FormWindowState
     #endregion Generated Form Objects
@@ -45,7 +48,6 @@ function GenerateForm {
     $GetServices.Location = $System_Drawing_Point
     $GetServices.Name = "GetServices"
 
-    $System_Drawing_Size = New-Object System.Drawing.Size
     $System_Drawing_Size.Height = 23
     $System_Drawing_Size.Width = 105
 
@@ -57,7 +59,16 @@ function GenerateForm {
         $ClipBoard01.Name = "TagName"
         $ClipBoard01.Text = "Tag Name"
         $ClipBoard01.Size = $System_Drawing_Size
-        $ClipBoard01.add_Click({clipper "Tag Name Clipped"})
+        $ClipBoard01.add_Click({clipper "AutoShutdownSchedule" "Tag Name Clipped"})
+
+        $System_Drawing_Point.X = 120
+        $System_Drawing_Point.Y = 60
+
+        $ClipBoard02.Location = $System_Drawing_Point
+        $ClipBoard02.Name = "TagValue"
+        $ClipBoard02.Text = "Tag Value"
+        $ClipBoard02.Size = $System_Drawing_Size
+        $ClipBoard02.add_Click({clipper "4pm -> 7am" "Tag Value Clipped"})
 
     $GetServices.Size = $System_Drawing_Size
     $GetServices.TabIndex = 1
@@ -83,6 +94,7 @@ function GenerateForm {
     $MainForum.Controls.Add($richTextBox1)
     $MainForum.Controls.Add($GetServices)
     $MainForum.Controls.Add($ClipBoard01)
+    $MainForum.Controls.Add($ClipBoard02)
 
     #endregion
 
@@ -91,10 +103,10 @@ function GenerateForm {
         OutputText
     }
 
-    function clipper($stringToClip)
+    function clipper($stringToClip, $stringToSHow)
     {
         Set-Clipboard $stringToClip
-        $richTextBox1.Text = $stringToClip
+        $richTextBox1.Text = $stringToShow
     }
 
 
