@@ -10,6 +10,10 @@ function GenerateForm {
         $MainForum = New-Object System.Windows.Forms.Form
         $GetServices = New-Object System.Windows.Forms.Button
 
+        $clipBoardClips = @()
+        $clipBoardClips += "AutoShutdownSchedule"
+        $clipBoardClips += "4pm -> 7am"
+
         $ClipBoard01 = New-Object System.Windows.Forms.Button
         $ClipBoard02 = New-Object System.Windows.Forms.Button
 
@@ -59,7 +63,7 @@ function GenerateForm {
         $ClipBoard01.Name = "TagName"
         $ClipBoard01.Text = "Tag Name"
         $ClipBoard01.Size = $System_Drawing_Size
-        $ClipBoard01.add_Click({clipper "AutoShutdownSchedule" "Tag Name Clipped"})
+        $ClipBoard01.add_Click({clipper $clipBoardClips[0] "Tag Name Clipped"})
 
         $System_Drawing_Point.X = 120
         $System_Drawing_Point.Y = 60
