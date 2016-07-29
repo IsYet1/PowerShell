@@ -12,10 +12,15 @@ function GenerateForm {
 
         $arrayNdx = @{"x"=0; "y"=1; "clipThis"=2; "displayName"=3; "btn"=4};
         $clipBoardClips = @()
-        $clipBoardClips +=  ( 13,  60, "AutoShutdownSchedule", "Tag Name"),`
-                            (180,  60, "4pm -> 7am", "Tag Value"),`
-                            ( 13, 100, "Default Azure Subscription", "Azure Subscription Label"),`
-                            (180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value")
+        $clipBoardClips +=   ( 13,  60, "AutoShutdownSchedule", "Tag Name")`
+                            ,(180,  60, "4pm -> 7am", "Tag Value")`
+                            ,( 13, 100, "Default Azure Subscription", "Azure Subscription Label")`
+                            ,(180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value")`
+                            ,( 13, 140, "Default Automation Credential", "Credential Var Name")`
+                            ,(180, 140, "Automation@donmckenzielive.onmicrosoft.com", "Credential")`
+                            ,(360, 140, "422nclairmonT", "Password")`
+                            ,( 13, 180, "[parameter(Mandatory=$false)] [int]$TZOffset = 5", "TZ Parameter code")`
+                            ,(180, 180, ".AddHours(-$TZOffset)", "TZ code mods")
 
         $ClipBoard01 = New-Object System.Windows.Forms.Button
         $ClipBoard02 = New-Object System.Windows.Forms.Button
@@ -38,8 +43,8 @@ function GenerateForm {
     #----------------------------------------------
     #region Generated Form Code
         $System_Drawing_Size = New-Object System.Drawing.Size
-        $System_Drawing_Size.Height = 262
-        $System_Drawing_Size.Width = 461
+        $System_Drawing_Size.Height = 800
+        $System_Drawing_Size.Width = 800
         $MainForum.ClientSize = $System_Drawing_Size
         $MainForum.DataBindings.DefaultDataSourceUpdateMode = 0
         $MainForum.Name = "MainForum"
@@ -92,12 +97,12 @@ function GenerateForm {
     $richTextBox1.DataBindings.DefaultDataSourceUpdateMode = 0
     $System_Drawing_Point = New-Object System.Drawing.Point
     $System_Drawing_Point.X = 12
-    $System_Drawing_Point.Y = 132
+    $System_Drawing_Point.Y = 400
     $richTextBox1.Location = $System_Drawing_Point
     $richTextBox1.Name = "richTextBox1"
 
     $System_Drawing_Size = New-Object System.Drawing.Size
-    $System_Drawing_Size.Height = 118
+    $System_Drawing_Size.Height = 50
     $System_Drawing_Size.Width = 437
     $richTextBox1.Size = $System_Drawing_Size
     $richTextBox1.TabIndex = 0
