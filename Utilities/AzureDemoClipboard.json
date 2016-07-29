@@ -1,5 +1,7 @@
 {
-
+"defaultWidth": 170,
+"defaultHeight": 40,
+"left": 13,
 "buttonRows": [
     {
         "top": 60,
@@ -14,8 +16,8 @@
                 "paste": "4pm -> 7am"
             }
         ]
-    },
-    {
+    }
+    ,{
         "top": 100,
         "width": 170,
         "buttons": [
@@ -26,6 +28,20 @@
             {
                 "display": "Tag Name",
                 "paste": "AutoShutdownSchedule"
+            }
+        ]
+    }
+    ,{
+        "top": 100,
+        "width": 170,
+        "buttons": [
+            {
+                "display": "Azure Subscription Label",
+                "paste": "Default Azure Subscription"
+            },
+            {
+                "display": "Azure Subscription Value",
+                "paste": "VM and Web Apps 3d5fb527"
             }
         ]
     }

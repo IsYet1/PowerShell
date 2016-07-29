@@ -1,12 +1,12 @@
-﻿$buttonRows = @()
-$json = ""
-function readFile
-{
-    $json = Get-Content "AzureDemoClipboard.json" -Raw
-    write $json
+﻿$jsonFile = "AzureDemoClipboard.json"
 
-    $buttonRows = ConvertFrom-Json -InputObject $json
-    
+$buttonRows = ConvertFrom-Json -InputObject (Get-Content $jsonFile -Raw)
+
+
+
+function readFile ()
+{
+    #return $buttonRows
 }
 
-readFile
+#readFile
