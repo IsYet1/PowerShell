@@ -1,0 +1,34 @@
+{
+
+"buttonRows": [
+    {
+        "top": 60,
+        "width": 170,
+        "buttons": [
+            {
+                "display": "Tag Name",
+                "paste": "AutoShutdownSchedule"
+            },
+            {
+                "display": "Tag Value",
+                "paste": "4pm -> 7am"
+            }
+        ]
+    },
+    {
+        "top": 100,
+        "width": 170,
+        "buttons": [
+            {
+                "display": "Tag Name",
+                "paste": "4pm -> 7am"
+            },
+            {
+                "display": "Tag Name",
+                "paste": "AutoShutdownSchedule"
+            }
+        ]
+    }
+]
+
+}
