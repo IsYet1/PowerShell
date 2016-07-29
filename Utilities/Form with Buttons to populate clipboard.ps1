@@ -10,12 +10,12 @@ function GenerateForm {
         $MainForum = New-Object System.Windows.Forms.Form
         $GetServices = New-Object System.Windows.Forms.Button
 
-        $clipBoardBtns = @()
+        $arrayNdx = @{"x"=0; "y"=1; "clipThis"=2; "displayName"=3; "btn"=4};
         $clipBoardClips = @()
-        $clipBoardClips +=  ("btn01",  13,  60, "AutoShutdownSchedule", "Tag Name", (New-Object System.Windows.Forms.Button)),`
-                            ("btn02", 180,  60, "4pm -> 7am", "Tag Value", (New-Object System.Windows.Forms.Button)),`
-                            ("btn03",  13, 100, "Default Azure Subscription", "Azure Subscription Label", (New-Object System.Windows.Forms.Button)),`
-                            ("btn04", 180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value", (New-Object System.Windows.Forms.Button))
+        $clipBoardClips +=  ( 13,  60, "AutoShutdownSchedule", "Tag Name"),`
+                            (180,  60, "4pm -> 7am", "Tag Value"),`
+                            ( 13, 100, "Default Azure Subscription", "Azure Subscription Label"),`
+                            (180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value")
 
         $ClipBoard01 = New-Object System.Windows.Forms.Button
         $ClipBoard02 = New-Object System.Windows.Forms.Button
@@ -62,44 +62,25 @@ function GenerateForm {
 
     foreach($clipp in $clipBoardClips)
     {
-        write $btnCounter;
-        $System_Drawing_Point.X =  $clipp[1]
-        $System_Drawing_Point.Y =  $clipp[2]
+        #Add the button to the current array item. Will be array index [4]
+        $clipp += (New-Object System.Windows.Forms.Button)
 
-        $clipp[5].Location = $System_Drawing_Point
-        $clipp[5].Name = "btn" + $btnCounter
-        $clipp[5].Text = $clipp[4]
-        $clipp[5].Size = $System_Drawing_Size
-        $clipp[5].Tag = $clipp[3]
+        $System_Drawing_Point.X =  $clipp[$arrayNdx.x]
+        $System_Drawing_Point.Y =  $clipp[$arrayNdx.y]
 
-        $clipp[5].add_Click({clipper})
-#        $clipp[5].Add_Click($btnClick)
-        write $clipp[5]
+        $clipp[$arrayNdx.btn].Location = $System_Drawing_Point
+        $clipp[$arrayNdx.btn].Name = "btn" + $btnCounter
+        $clipp[$arrayNdx.btn].Text = $clipp[$arrayNdx.displayName]
+        $clipp[$arrayNdx.btn].Size = $System_Drawing_Size
+        $clipp[$arrayNdx.btn].Tag = $clipp[$arrayNdx.clipThis]
 
-        $MainForum.Controls.Add($clipp[5])
+        $clipp[$arrayNdx.btn].add_Click({clipper})
+        #write $clipp[4]
+
+        $MainForum.Controls.Add($clipp[$arrayNdx.btn])
         $btnCounter++
-
     }
 
-    #Clipboard button 1
-        $System_Drawing_Point.X =  $clipBoardClips[0][1]
-        $System_Drawing_Point.Y =  $clipBoardClips[0][2]
-
-        $ClipBoard01.Location = $System_Drawing_Point
-        $ClipBoard02.Name = $clipBoardClips[0][0]
-        $ClipBoard01.Text = $clipBoardClips[0][4]
-        $ClipBoard01.Size = $System_Drawing_Size
-        $ClipBoard01.add_Click({clipper $clipBoardClips[0][3] $clipBoardClips[0][4]})
-
-        $System_Drawing_Point.X =  $clipBoardClips[1][1]
-        $System_Drawing_Point.Y =  $clipBoardClips[1][2]
-
-        $ClipBoard02.Location = $System_Drawing_Point
-        $ClipBoard02.Name = $clipBoardClips[1][0]
-        $ClipBoard02.Text = $clipBoardClips[1][4]
-        $ClipBoard02.Size = $System_Drawing_Size
-
-        $ClipBoard02.add_Click({clipper  $clipBoardClips[1][3] $clipBoardClips[1][4]})
 
     $GetServices.Size = $System_Drawing_Size
     $GetServices.TabIndex = 1
@@ -136,8 +117,11 @@ function GenerateForm {
 
     function clipper()
     {
+        #Must get the button values from the $this variable.
+        #This function requires that the text to copy is placed in the .Tag property
         Set-Clipboard $this.Tag
-        $richTextBox1.Text = $this.Text + " COPIED"
+        $richTextBox1.Text = $this.Text + " COPIED" + "`r"
+        $richTextBox1.Text += $this.tag
     }
 
 
