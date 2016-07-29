@@ -11,8 +11,7 @@ function GenerateForm {
         $GetServices = New-Object System.Windows.Forms.Button
 
         $arrayNdx = @{"x"=0; "y"=1; "clipThis"=2; "displayName"=3; "btn"=4};
-        $clipBoardClips = @()
-        $clipBoardClips +=   ( 13,  60, "AutoShutdownSchedule", "Tag Name")`
+        $clipBoardClips =   (( 13,  60, "AutoShutdownSchedule", "Tag Name")`
                             ,(180,  60, "4pm -> 7am", "Tag Value")`
                             ,( 13, 100, "Default Azure Subscription", "Azure Subscription Label")`
                             ,(180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value")`
@@ -20,7 +19,8 @@ function GenerateForm {
                             ,(180, 140, "Automation@donmckenzielive.onmicrosoft.com", "Credential")`
                             ,(360, 140, "422nclairmonT", "Password")`
                             ,( 13, 180, "[parameter(Mandatory=$false)] [int]$TZOffset = 5", "TZ Parameter code")`
-                            ,(180, 180, ".AddHours(-$TZOffset)", "TZ code mods")
+                            ,(180, 180, ".AddHours(-$TZOffset)", "TZ code mods")`
+                            )
 
         $ClipBoard01 = New-Object System.Windows.Forms.Button
         $ClipBoard02 = New-Object System.Windows.Forms.Button
@@ -126,7 +126,14 @@ function GenerateForm {
         #This function requires that the text to copy is placed in the .Tag property
         Set-Clipboard $this.Tag
         $richTextBox1.Text = $this.Text + " COPIED" + "`r"
-        $richTextBox1.Text += $this.tag
+        if ($this.Text -like "Password")
+        {
+            $richTextBox1.Text += "*********"
+        }
+        else
+        {
+            $richTextBox1.Text += $this.tag
+        }
     }
 
 
