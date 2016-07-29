@@ -10,9 +10,12 @@ function GenerateForm {
         $MainForum = New-Object System.Windows.Forms.Form
         $GetServices = New-Object System.Windows.Forms.Button
 
+        $clipBoardBtns = @()
         $clipBoardClips = @()
-        $clipBoardClips += "AutoShutdownSchedule"
-        $clipBoardClips += "4pm -> 7am"
+        $clipBoardClips +=  ("btn01",  13,  60, "AutoShutdownSchedule", "Tag Name", (New-Object System.Windows.Forms.Button)),`
+                            ("btn02", 180,  60, "4pm -> 7am", "Tag Value", (New-Object System.Windows.Forms.Button)),`
+                            ("btn03",  13, 100, "Default Azure Subscription", "Azure Subscription Label", (New-Object System.Windows.Forms.Button)),`
+                            ("btn04", 180, 100, "VM and Web Apps 3d5fb527", "Azure Subscription Value", (New-Object System.Windows.Forms.Button))
 
         $ClipBoard01 = New-Object System.Windows.Forms.Button
         $ClipBoard02 = New-Object System.Windows.Forms.Button
@@ -53,26 +56,50 @@ function GenerateForm {
     $GetServices.Name = "GetServices"
 
     $System_Drawing_Size.Height = 23
-    $System_Drawing_Size.Width = 105
+    $System_Drawing_Size.Width = 155
+
+    [int]$btnCounter = 0
+
+    foreach($clipp in $clipBoardClips)
+    {
+        write $btnCounter;
+        $System_Drawing_Point.X =  $clipp[1]
+        $System_Drawing_Point.Y =  $clipp[2]
+
+        $clipp[5].Location = $System_Drawing_Point
+        $clipp[5].Name = "btn" + $btnCounter
+        $clipp[5].Text = $clipp[4]
+        $clipp[5].Size = $System_Drawing_Size
+        $clipp[5].Tag = $clipp[3]
+
+        $clipp[5].add_Click({clipper})
+#        $clipp[5].Add_Click($btnClick)
+        write $clipp[5]
+
+        $MainForum.Controls.Add($clipp[5])
+        $btnCounter++
+
+    }
 
     #Clipboard button 1
-        $System_Drawing_Point.X = 13
-        $System_Drawing_Point.Y = 60
+        $System_Drawing_Point.X =  $clipBoardClips[0][1]
+        $System_Drawing_Point.Y =  $clipBoardClips[0][2]
 
         $ClipBoard01.Location = $System_Drawing_Point
-        $ClipBoard01.Name = "TagName"
-        $ClipBoard01.Text = "Tag Name"
+        $ClipBoard02.Name = $clipBoardClips[0][0]
+        $ClipBoard01.Text = $clipBoardClips[0][4]
         $ClipBoard01.Size = $System_Drawing_Size
-        $ClipBoard01.add_Click({clipper $clipBoardClips[0] "Tag Name Clipped"})
+        $ClipBoard01.add_Click({clipper $clipBoardClips[0][3] $clipBoardClips[0][4]})
 
-        $System_Drawing_Point.X = 120
-        $System_Drawing_Point.Y = 60
+        $System_Drawing_Point.X =  $clipBoardClips[1][1]
+        $System_Drawing_Point.Y =  $clipBoardClips[1][2]
 
         $ClipBoard02.Location = $System_Drawing_Point
-        $ClipBoard02.Name = "TagValue"
-        $ClipBoard02.Text = "Tag Value"
+        $ClipBoard02.Name = $clipBoardClips[1][0]
+        $ClipBoard02.Text = $clipBoardClips[1][4]
         $ClipBoard02.Size = $System_Drawing_Size
-        $ClipBoard02.add_Click({clipper "4pm -> 7am" "Tag Value Clipped"})
+
+        $ClipBoard02.add_Click({clipper  $clipBoardClips[1][3] $clipBoardClips[1][4]})
 
     $GetServices.Size = $System_Drawing_Size
     $GetServices.TabIndex = 1
@@ -93,12 +120,12 @@ function GenerateForm {
     $System_Drawing_Size.Width = 437
     $richTextBox1.Size = $System_Drawing_Size
     $richTextBox1.TabIndex = 0
-    $richTextBox1.Text = "Results Out Put To This Box"
+    #$richTextBox1.Text = "Results Out Put To This Box"
 
     $MainForum.Controls.Add($richTextBox1)
     $MainForum.Controls.Add($GetServices)
-    $MainForum.Controls.Add($ClipBoard01)
-    $MainForum.Controls.Add($ClipBoard02)
+    #$MainForum.Controls.Add($ClipBoard01)
+    #$MainForum.Controls.Add($ClipBoard02)
 
     #endregion
 
@@ -107,10 +134,10 @@ function GenerateForm {
         OutputText
     }
 
-    function clipper($stringToClip, $stringToSHow)
+    function clipper()
     {
-        Set-Clipboard $stringToClip
-        $richTextBox1.Text = $stringToShow
+        Set-Clipboard $this.Tag
+        $richTextBox1.Text = $this.Text + " COPIED"
     }
 
 
