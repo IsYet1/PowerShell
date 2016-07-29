@@ -18,8 +18,8 @@ function GenerateForm {
                             ,( 13, 140, "Default Automation Credential", "Credential Var Name")`
                             ,(180, 140, "Automation@donmckenzielive.onmicrosoft.com", "Credential")`
                             ,(360, 140, "422nclairmonT", "Password")`
-                            ,( 13, 180, "[parameter(Mandatory=$false)] [int]$TZOffset = 5", "TZ Parameter code")`
-                            ,(180, 180, ".AddHours(-$TZOffset)", "TZ code mods")`
+                            ,( 13, 180, '[parameter(Mandatory=$false)] [int]$TZOffset = 5', "TZ Parameter code")`
+                            ,(180, 180, '.AddHours(-$TZOffset)', "TZ code mods")`
                             )
 
         $ClipBoard01 = New-Object System.Windows.Forms.Button
@@ -48,17 +48,10 @@ function GenerateForm {
         $MainForum.ClientSize = $System_Drawing_Size
         $MainForum.DataBindings.DefaultDataSourceUpdateMode = 0
         $MainForum.Name = "MainForum"
-        $MainForum.Text = "Demo GUI"
+        $MainForum.Text = "Clipboarder"
 
 
-    $GetServices.DataBindings.DefaultDataSourceUpdateMode = 0
-
-        $System_Drawing_Point = New-Object System.Drawing.Point
-        $System_Drawing_Point.X = 13
-        $System_Drawing_Point.Y = 26
-
-    $GetServices.Location = $System_Drawing_Point
-    $GetServices.Name = "GetServices"
+    $System_Drawing_Point = New-Object System.Drawing.Point
 
     $System_Drawing_Size.Height = 23
     $System_Drawing_Size.Width = 155
@@ -87,12 +80,6 @@ function GenerateForm {
     }
 
 
-    $GetServices.Size = $System_Drawing_Size
-    $GetServices.TabIndex = 1
-    $GetServices.Text = "Get Services"
-    $GetServices.UseVisualStyleBackColor = $True
-
-    $GetServices.add_Click({ GetServices($GetServices) })
 
     $richTextBox1.DataBindings.DefaultDataSourceUpdateMode = 0
     $System_Drawing_Point = New-Object System.Drawing.Point
@@ -105,20 +92,12 @@ function GenerateForm {
     $System_Drawing_Size.Height = 50
     $System_Drawing_Size.Width = 437
     $richTextBox1.Size = $System_Drawing_Size
-    $richTextBox1.TabIndex = 0
-    #$richTextBox1.Text = "Results Out Put To This Box"
+    $richTextBox1.TabStop = $false #  TabIndex = 0
 
     $MainForum.Controls.Add($richTextBox1)
-    $MainForum.Controls.Add($GetServices)
-    #$MainForum.Controls.Add($ClipBoard01)
-    #$MainForum.Controls.Add($ClipBoard02)
 
     #endregion
 
-    function GetServices($object)
-    {
-        OutputText
-    }
 
     function clipper()
     {
@@ -136,17 +115,6 @@ function GenerateForm {
         }
     }
 
-
-    function OutputText($object)
-    {
-        $service = (Get-Service s*) 
-        foreach ($_ in $service)
-        {
-            $name = $_.Name
-            $status = $_.Status
-            $richTextBox1.Text = $richTextBox1.Text + $name + "  "  +$status  + "`r"
-        }
-    }
 
     #Save the initial state of the form
     $InitialFormWindowState = $MainForum.WindowState
