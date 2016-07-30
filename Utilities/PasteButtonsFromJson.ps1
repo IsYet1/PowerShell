@@ -24,7 +24,6 @@
         $richTextBox1.Size = $System_Drawing_Size
         $richTextBox1.TabStop = $false #  TabIndex = 0
 
-        $MainForum.Controls.Add($richTextBox1)
 
     #endregion
 
@@ -44,7 +43,39 @@
         #Init the OnLoad event to correct the initial state of the form
         $MainForum.add_Load($OnLoadForm_StateCorrection)
         #Show the Form
+    #endregion
+
+    #region Add buttons to the form
+        $row = 0
+        $col = 0
+        foreach($btnRow in $buttonRows.buttonRows)
+        {
+            foreach($btn in $btnRow.buttons){
+
+                Add-Member -InputObject $btn -MemberType NoteProperty  -Name ButtonObject  -Value (New-Object System.Windows.Forms.Button)
+                $btn.ButtonObject.Text = $btn.display
+                $btn.ButtonObject.Top = $btnRow.top
+                $btn.ButtonObject.Left= $buttonRows.left
+                $btn.ButtonObject.Width = $btnRow.width
+
+                $btn.ButtonObject.Name = "btn" + $row + $col
+                $MainForum.Controls.Add($btn.ButtonObject)
+
+                $col++
+            }
+            $row++
+        }
+
+    #endregion
+
+    #region Add elements to the Form
+        $MainForum.Controls.Add($richTextBox1)
+
+    #endregion
+
+    #region Main form display
         $MainForum.ShowDialog()| Out-Null
+
     #endregion
 
 
