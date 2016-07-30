@@ -1,7 +1,8 @@
 {
 "defaultWidth": 170,
-"defaultHeight": 40,
+"defaultHeight": 60,
 "left": 13,
+"margin": 10,
 "buttonRows": [
     {
         "top": 60,
@@ -32,7 +33,7 @@
         ]
     }
     ,{
-        "top": 100,
+        "top": 140,
         "width": 170,
         "buttons": [
             {
@@ -44,7 +45,6 @@
                 "paste": "VM and Web Apps 3d5fb527"
             }
         ]
-    }
-]
+    }]
 
 }

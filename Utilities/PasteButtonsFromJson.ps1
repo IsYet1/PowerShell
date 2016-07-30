@@ -50,19 +50,21 @@
         $col = 0
         foreach($btnRow in $buttonRows.buttonRows)
         {
+            $left = $buttonRows.left
             foreach($btn in $btnRow.buttons){
                 write $btn.display
 
                 Add-Member -InputObject $btn -MemberType NoteProperty  -Name ButtonObject  -Value (New-Object System.Windows.Forms.Button)
                 $btn.ButtonObject.Text = $btn.display
                 $btn.ButtonObject.Top = $btnRow.top
-                $btn.ButtonObject.Left= $buttonRows.left
+                $btn.ButtonObject.Left= $left
                 $btn.ButtonObject.Width = $btnRow.width
-
+                $btn.ButtonObject.Height = $buttonRows.defaultHeight
                 $btn.ButtonObject.Name = "btn" + $row + $col
                 $MainForum.Controls.Add($btn.ButtonObject)
 
                 $col++
+                $left+=($btnRow.width + $buttonRows.margin)
             }
             $row++
         }
