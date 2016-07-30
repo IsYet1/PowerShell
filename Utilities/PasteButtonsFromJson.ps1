@@ -48,24 +48,32 @@
     #region Add buttons to the form
         $row = 0
         $col = 0
+        $top = $buttonRows.top
         foreach($btnRow in $buttonRows.buttonRows)
         {
             $left = $buttonRows.left
+
+            $width = $buttonRows.defaultWidth
+            write $width
+            if ($btnRow.width -gt 0)
+                {$width = $btnRow.width}
+
             foreach($btn in $btnRow.buttons){
                 write $btn.display
 
                 Add-Member -InputObject $btn -MemberType NoteProperty  -Name ButtonObject  -Value (New-Object System.Windows.Forms.Button)
                 $btn.ButtonObject.Text = $btn.display
-                $btn.ButtonObject.Top = $btnRow.top
+                $btn.ButtonObject.Top = $top ##$btnRow.top
                 $btn.ButtonObject.Left= $left
-                $btn.ButtonObject.Width = $btnRow.width
+                $btn.ButtonObject.Width = $width
                 $btn.ButtonObject.Height = $buttonRows.defaultHeight
                 $btn.ButtonObject.Name = "btn" + $row + $col
                 $MainForum.Controls.Add($btn.ButtonObject)
 
                 $col++
-                $left+=($btnRow.width + $buttonRows.margin)
+                $left+=($width + $buttonRows.margin)
             }
+            $top+=($buttonRows.defaultHeight + $buttonRows.margin)
             $row++
         }
 

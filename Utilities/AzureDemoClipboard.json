@@ -1,12 +1,11 @@
 {
-"defaultWidth": 170,
-"defaultHeight": 60,
+"defaultWidth": 300,
+"defaultHeight": 70,
 "left": 13,
+"top": 60,
 "margin": 10,
 "buttonRows": [
     {
-        "top": 60,
-        "width": 170,
         "buttons": [
             {
                 "display": "Tag Name",
@@ -19,22 +18,6 @@
         ]
     }
     ,{
-        "top": 100,
-        "width": 170,
-        "buttons": [
-            {
-                "display": "Tag Name",
-                "paste": "4pm -> 7am"
-            },
-            {
-                "display": "Tag Name",
-                "paste": "AutoShutdownSchedule"
-            }
-        ]
-    }
-    ,{
-        "top": 140,
-        "width": 170,
         "buttons": [
             {
                 "display": "Azure Subscription Label",
@@ -45,6 +28,37 @@
                 "paste": "VM and Web Apps 3d5fb527"
             }
         ]
-    }]
+    }
+    ,{
+        "width": 196,
+        "buttons": [
+            {
+                "display": "Credential Var Name",
+                "paste": "Default Automation Credential"
+            },
+            {
+                "display": "Credential",
+                "paste": "Automation@donmckenzielive.onmicrosoft.com"
+            },
+            {
+                "display": "Password",
+                "paste": "422nclairmonT"
+            }
+        ]
+    }
+    ,{
+        "buttons": [
+            {
+                "display": "TZ Parameter code",
+                "paste": "[parameter(Mandatory=$false)] [int]$TZOffset = 5"
+            },
+            {
+                "display": "TZ code mods",
+                "paste": "AddHours(-$TZOffset)"
+            }
+        ]
+    }
+    
+    ]
 
 }
