@@ -3,15 +3,15 @@
     {
         #Must get the button values from the $this variable.
         #This function requires that the text to copy is placed in the .Tag property
-        Set-Clipboard $this.Tag
-        $richTextBox1.Text = $this.PasteText + " COPIED" + "`r"
+        Set-Clipboard $this.PasteText
+        $richTextBox1.Text = $this.PasteDisplay + " COPIED" + "`r"
         if ($this.Text -like "Password")
         {
             $richTextBox1.Text += "*********"
         }
         else
         {
-            $richTextBox1.Text += $this.tag
+            $richTextBox1.Text += $this.PasteText
         }
     }
     #endregion
@@ -28,12 +28,17 @@
     #endregion
 
     #region Rich Text Box
+        $font = New-Object System.Windows.Forms.FontDialog
         $richTextBox1 = New-Object System.Windows.Forms.RichTextBox
         $richTextBox1.DataBindings.DefaultDataSourceUpdateMode = 0
         $System_Drawing_Point = New-Object System.Drawing.Point
         $System_Drawing_Point.X = 12
         $System_Drawing_Point.Y = 400
         $richTextBox1.Location = $System_Drawing_Point
+        
+        $richTextBox1.Font = new Font("Tahoma", 12)
+        write $richTextBox1.Font
+
         $richTextBox1.Name = "richTextBox1"
 
         $System_Drawing_Size = New-Object System.Drawing.Size
