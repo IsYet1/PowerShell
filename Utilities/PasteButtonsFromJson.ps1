@@ -51,6 +51,7 @@
         foreach($btnRow in $buttonRows.buttonRows)
         {
             foreach($btn in $btnRow.buttons){
+                write $btn.display
 
                 Add-Member -InputObject $btn -MemberType NoteProperty  -Name ButtonObject  -Value (New-Object System.Windows.Forms.Button)
                 $btn.ButtonObject.Text = $btn.display
