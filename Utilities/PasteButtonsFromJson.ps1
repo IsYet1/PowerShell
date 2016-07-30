@@ -1,4 +1,22 @@
-﻿    #region Read Json file
+﻿    #region Clipper function
+    function clipper()
+    {
+        #Must get the button values from the $this variable.
+        #This function requires that the text to copy is placed in the .Tag property
+        Set-Clipboard $this.Tag
+        $richTextBox1.Text = $this.PasteText + " COPIED" + "`r"
+        if ($this.Text -like "Password")
+        {
+            $richTextBox1.Text += "*********"
+        }
+        else
+        {
+            $richTextBox1.Text += $this.tag
+        }
+    }
+    #endregion
+
+    #region Read Json file
         $jsonFile = "c:\git\powershell\utilities\AzureDemoClipboard.json"
 
         $buttonRows = ConvertFrom-Json -InputObject (Get-Content $jsonFile -Raw)
@@ -68,10 +86,16 @@
                 $btn.ButtonObject.Width = $width
                 $btn.ButtonObject.Height = $buttonRows.defaultHeight
                 $btn.ButtonObject.Name = "btn" + $row + $col
-                $MainForum.Controls.Add($btn.ButtonObject)
+
+                Add-Member -InputObject $btn.ButtonObject -MemberType NoteProperty -Name PasteText -Value $btn.paste
+                Add-Member -InputObject $btn.ButtonObject -MemberType NoteProperty -Name PasteDisplay -Value $btn.display
+
+                $btn.ButtonObject.Add_Click({clipper})
 
                 $col++
                 $left+=($width + $buttonRows.margin)
+
+                $MainForum.Controls.Add($btn.ButtonObject)
             }
             $top+=($buttonRows.defaultHeight + $buttonRows.margin)
             $row++
@@ -88,6 +112,12 @@
         $MainForum.ShowDialog()| Out-Null
 
     #endregion
+
+
+
+
+
+
 
 
 
