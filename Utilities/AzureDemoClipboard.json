@@ -42,7 +42,8 @@
             },
             {
                 "display": "Password",
-                "paste": "422nclairmonT"
+                "paste": "422nclairmonT",
+                "mask": true
             }
         ]
     }

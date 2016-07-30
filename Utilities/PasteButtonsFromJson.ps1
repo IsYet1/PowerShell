@@ -5,7 +5,8 @@
         #This function requires that the text to copy is placed in the .Tag property
         Set-Clipboard $this.PasteText
         $richTextBox1.Text = $this.PasteDisplay + " COPIED" + "`r"
-        if ($this.Text -like "Password")
+        #if ($this.Text -like "Password")
+        if ($this.MaskOutput)
         {
             $richTextBox1.Text += "*********"
         }
@@ -36,14 +37,14 @@
         $System_Drawing_Point.Y = 400
         $richTextBox1.Location = $System_Drawing_Point
         
-        $richTextBox1.Font = new Font("Tahoma", 12)
+        $richTextBox1.Font = "Arial, 14"
         write $richTextBox1.Font
 
         $richTextBox1.Name = "richTextBox1"
 
         $System_Drawing_Size = New-Object System.Drawing.Size
-        $System_Drawing_Size.Height = 50
-        $System_Drawing_Size.Width = 437
+        $System_Drawing_Size.Height = 70
+        $System_Drawing_Size.Width = 500
         $richTextBox1.Size = $System_Drawing_Size
         $richTextBox1.TabStop = $false #  TabIndex = 0
 
@@ -94,6 +95,10 @@
 
                 Add-Member -InputObject $btn.ButtonObject -MemberType NoteProperty -Name PasteText -Value $btn.paste
                 Add-Member -InputObject $btn.ButtonObject -MemberType NoteProperty -Name PasteDisplay -Value $btn.display
+                if ($btn.mask)
+                {
+                    Add-Member -InputObject $btn.ButtonObject -MemberType NoteProperty -Name MaskOutput -Value $true
+                }
 
                 $btn.ButtonObject.Add_Click({clipper})
 
