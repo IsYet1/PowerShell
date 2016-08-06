@@ -13,7 +13,7 @@ function ReadJsonBuildButtonRowDataObjs($file)
     return $buttonRows
 }
 
-function CreateMainForm($textBox)
+function CreateMainForm()
 {
     $MainForm = New-Object System.Windows.Forms.Form
     $System_Drawing_Size = New-Object System.Drawing.Size
@@ -30,12 +30,10 @@ function CreateMainForm($textBox)
     #Init the OnLoad event to correct the initial state of the form
     $MainForm.add_Load($OnLoadForm_StateCorrection)
 
-    ###$MainForm.Controls.Add($textBox)
-
     #Show the Form
     $MainForm.ShowDialog()| Out-Null
 
-    return $MainForm
+    #return $MainForm
 }
 
 function BuildTextBox()
@@ -95,9 +93,9 @@ $buttonRows = ReadJsonBuildButtonRowDataObjs  $buttonDataFile
 Write-Output $buttonRows
 
 $textBox = BuildTextBox
-$mainForm = CreateMainForm $textBox
+CreateMainForm
 
-AddTextBox $mainForm
+#AddTextBox $mainForm
 
 AddButtons
 
