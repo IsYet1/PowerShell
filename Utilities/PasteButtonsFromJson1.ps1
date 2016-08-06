@@ -30,7 +30,7 @@ function CreateMainForm($textBox)
     #Init the OnLoad event to correct the initial state of the form
     $MainForm.add_Load($OnLoadForm_StateCorrection)
 
-    $MainForm.Controls.Add($textBox)
+    ###$MainForm.Controls.Add($textBox)
 
     #Show the Form
     $MainForm.ShowDialog()| Out-Null
