@@ -31,9 +31,9 @@ function CreateMainForm()
     $MainForm.add_Load($OnLoadForm_StateCorrection)
 
     #Show the Form
-    $MainForm.ShowDialog()| Out-Null
+    #$MainForm.ShowDialog()| Out-Null
 
-    #return $MainForm
+    return $MainForm
 }
 
 function BuildTextBox()
@@ -93,7 +93,9 @@ $buttonRows = ReadJsonBuildButtonRowDataObjs  $buttonDataFile
 Write-Output $buttonRows
 
 $textBox = BuildTextBox
-CreateMainForm
+$form = CreateMainForm
+$form.ShowDialog()| Out-Null
+
 
 #AddTextBox $mainForm
 
